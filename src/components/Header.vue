@@ -19,71 +19,73 @@
 </template>
 
 <script>
-import store from '../store/index.js';
-import { mapState } from 'vuex';
+	import store from '../store/index.js';
+	import {
+		mapState
+	} from 'vuex';
 
-export default {
-	name: 'Header',
-	store,
-	computed: {
-		...mapState(['header_lists'])
-	},
-	methods: {
-		listClick(src) {
-			console.log(src);
+	export default {
+		name: 'Header',
+		store,
+		computed: {
+			...mapState(['header_lists'])
+		},
+		methods: {
+			listClick(src) {
+				console.log(src);
+			}
 		}
-	}
-};
+	};
 </script>
 
 <style scoped>
-.header {
-	display: flex;
-	width: 100%;
-	height: 80px;
-	color: aliceblue;
-	background-color: #2c3e50;
-	border-bottom: 1px solid #1f2d3d;
-	overflow: hidden;
-	padding: 5px 0;
-}
+	.header {
+		display: flex;
+		width: 100%;
+		height: 80px;
+		color: aliceblue;
+		background-color: #2c3e50;
+		border-bottom: 1px solid #1f2d3d;
+		overflow: hidden;
+		padding: 5px 0;
+	}
 
-.header_logo {
-	width: 260px;
-	height: 100%;
-	line-height: 80px;
-	font-size: 22px;
-	text-align: center;
-}
+	.header_logo {
+		width: 260px;
+		height: 100%;
+		line-height: 80px;
+		font-size: 22px;
+		text-align: center;
+	}
 
-.header_lists li {
-	width: 80px;
-	height: 80px;
-	text-align: center;
-	cursor: pointer;
-}
+	.header_lists li {
+		width: 80px;
+		height: 80px;
+		text-align: center;
+		cursor: pointer;
+	}
 
-.header_lists li:hover {
-	transform: scale(1.05);
-}
+	.header_lists li:hover {
+		transform: scale(1.05);
+	}
 
-.header_lists li img {
-	margin: 1px 0 3px 0;
-}
+	.header_lists li img {
+		margin: 1px 0 3px 0;
+	}
 
-.header_lists li p {
-	font-size: 13px;
-}
+	.header_lists li p {
+		font-size: 13px;
+	}
 
-.key {
-	width: 42px;
-	height: 42px;
-	border: 1px solid #409EFF;
-}
+	.key {
+		width: 42px;
+		height: 42px;
+		border: 1px solid #409EFF;
+	}
 
-.close {
-	width: 42px;
-	height: 42px;
-	border: 1px solid #409EFF;
-}
+	.close {
+		width: 42px;
+		height: 42px;
+		border: 1px solid #409EFF;
+	}
 </style>
