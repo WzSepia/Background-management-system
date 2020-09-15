@@ -1,14 +1,14 @@
 <template>
 	<div class="menu">
 		<template v-for="(item,index) in items">
-			<router-link :to="item.link" v-if="item.link" :key="index">
-				<el-menu-item v-if="item.children == null || item.children.length == 0" :index="item.link">
+			<router-link :to="item.path" v-if="item.path" :key="index">
+				<el-menu-item v-if="item.children == null || item.children.length == 0" :index="item.path">
 					<i :class="item.icon"></i>
 					<span>{{item.name}}</span>
 				</el-menu-item>
 			</router-link>
 			<!-- 判断是否存在二级路由 -->
-			<el-submenu v-if="item.children" :index="item.link" :key="index">
+			<el-submenu v-if="item.children" :index="item.path" :key="index">
 				<template slot="title">
 					<i :class="item.icon"></i>
 					<span>{{item.name}}</span>
@@ -53,7 +53,7 @@
 	}
 
 	.menu a:hover {
-		background-color: rgba(20, 20, 20, .6);
+		background-color: #2d3742 !important;
 	}
 
 	.menu a.router-link-exact-active {
@@ -61,8 +61,16 @@
 		background-color: #004e84;
 	}
 
+	.el-menu {
+		background-color: #334157 !important;
+	}
+
 	.el-menu-item span {
 		color: #FFFFFF;
+	}
+
+	.el-menu--collapse span {
+		display: none;
 	}
 
 	.el-menu-item:focus,
@@ -70,16 +78,11 @@
 		background-color: transparent !important;
 	}
 
-	.el-menu-vertical-demo {
-		width: 64px;
-	}
-	
-	.el-menu--collapse span{
-		display: none;
+	.el-submenu__title {
+		color: #FFFFFF !important;
 	}
 
-	.el-menu-vertical-demo:not(.el-menu--collapse) {
-		width: 260px;
-		min-height: 400px;
+	.el-submenu__title:hover {
+		background-color: #2d3742 !important;
 	}
 </style>

@@ -1,15 +1,11 @@
 <template>
 	<div class="aside fl">
 		<div class="collapse-btn" @click="collapseChange">
-			<i class="el-icon-menu icon-btn"></i>
+			<i class="el-icon-s-grid icon-btn"></i>
 		</div>
-		<el-row class="tac">
-			<el-col :span="12">
-				<el-menu mode="vertical" :collapse="collapse" default-active="$router.link" class="el-menu-vertical-demo" @select="handleSelect">
-					<Menu :items="items" />
-				</el-menu>
-			</el-col>
-		</el-row>
+		<el-menu mode="vertical" :collapse="collapse" default-active="1" class="el-menu-vertical" @select="handleSelect">
+			<Menu :items="nav_list" />
+		</el-menu>
 	</div>
 </template>
 
@@ -24,21 +20,7 @@
 	export default {
 		name: 'Aside',
 		data() {
-			return {
-				items: [{
-					link: "/",
-					name: "Home",
-					icon: "el-icon-menu"
-				}, {
-					link: "/about",
-					name: "About",
-					icon: "el-icon-service",
-					children: [{
-						link: "/more",
-						name: "试试"
-					}]
-				}]
-			}
+			return {}
 		},
 		components: {
 			Menu
@@ -58,11 +40,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	.main {
-		width: 100%;
-		height: 100%;
-	}
-
 	.aside {
 		width: auto;
 		height: 100%;
@@ -72,11 +49,23 @@
 	}
 
 	.el-menu {
-		background-color: transparent;
+		border-right: none;
+		background-color: #324057 !important;
 	}
 
 	.collapse-btn {
 		color: #FFFFFF;
 		cursor: pointer;
+		padding-right: 24px;
+		text-align: right;
+	}
+
+	.el-menu-vertical-demo {
+		width: 64px;
+	}
+
+	.el-menu-vertical:not(.el-menu--collapse) {
+		width: 260px;
+		min-height: 400px;
 	}
 </style>

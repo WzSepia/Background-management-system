@@ -24,9 +24,9 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 	.view {
-		width: 100%;
+		flex: 1;
 		height: 100%;
-		background-color: bisque;
+		background-color: #FFFFFF;
 		overflow-x: hidden;
 		overflow-y: auto;
 	}

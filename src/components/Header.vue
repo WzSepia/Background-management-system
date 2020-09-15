@@ -1,17 +1,21 @@
 <template>
 	<div class="header">
-		<div class="header_logo">后台管理系统 {{ $store.state.count }}</div>
-		<ul class="header_lists">
+		<div class="header_logo fl">后台管理系统</div>
+		<!-- <ul class="header_lists fl">
 			<li class="fl" v-for="(item, index) in header_lists" :key="index">
 				<img :src="item.src" @click="listClick(item.src_click)" />
 				<p>{{ item.name }}</p>
 			</li>
-		</ul>
-		<div>
-			<!-- <el-button type="infor">点击</el-button> -->
+		</ul> -->
+		<div class="fl">
+			<el-tabs v-model="activeName" @tab-click="headerTabsClick">
+				<el-tab-pane v-for="(item, index) in header_lists" :key="index" :label="item.name" :name="index+''"></el-tab-pane>
+			</el-tabs>
+		</div>
+		<div class="fr">
 			<div class="fl">2020年9月14日</div>
 			<div class="fl">2</div>
-			<div class="fl">超级管理员欢迎您！</div>
+			<div class="fl">超级管理员</div>
 			<div class="key fl">4</div>
 			<div class="close fl">5</div>
 		</div>
@@ -21,33 +25,44 @@
 <script>
 	import store from '../store/index.js';
 	import {
-		mapState
+		mapState,
+		mapMutations
 	} from 'vuex';
 
 	export default {
 		name: 'Header',
+		data() {
+			return {
+				activeName: 0,
+			}
+		},
 		store,
 		computed: {
 			...mapState(['header_lists'])
 		},
 		methods: {
+			...mapMutations([""]),
 			listClick(src) {
 				console.log(src);
+			},
+			headerTabsClick(tab, event) {
+				this.activeName = tab.name;
+				//this.$router.push("./")
+				console.log(event, this.activeName);
 			}
 		}
 	};
 </script>
 
-<style scoped>
+<style>
 	.header {
-		display: flex;
 		width: 100%;
 		height: 80px;
-		color: aliceblue;
+		color: #FFFFFF;
 		background-color: #2c3e50;
 		border-bottom: 1px solid #1f2d3d;
 		overflow: hidden;
-		padding: 5px 0;
+		padding: 5px 31px 0 0;
 	}
 
 	.header_logo {
@@ -75,6 +90,14 @@
 
 	.header_lists li p {
 		font-size: 13px;
+	}
+
+	.el-tabs__item {
+		color: #FFFFFF !important;
+	}
+
+	.el-tabs__item.is-active {
+		color: #409EFF !important;
 	}
 
 	.key {
