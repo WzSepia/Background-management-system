@@ -1,6 +1,9 @@
 <template>
 	<div class="login posa">
-		<el-form :model="loginUser"></el-form>
+		登陆
+		<el-form :model="loginUser">
+			
+		</el-form>
 	</div>
 </template>
 
