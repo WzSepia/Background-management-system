@@ -1,6 +1,6 @@
 <template>
 	<div class="organization_management">
-		<h1>{{ msg }}</h1>
+		<iframe src="https://element.eleme.cn/2.0/#/zh-CN/component/installation"></iframe>
 	</div>
 </template>
 
@@ -24,5 +24,9 @@
 </script>
 
 <style scoped>
-	.organization_management {}
+	.organization_management,
+	iframe {
+		width: 100%;
+		height: 100%;
+	}
 </style>

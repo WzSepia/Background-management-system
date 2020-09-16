@@ -1,0 +1,26 @@
+[{
+		"path": "/UserMaintenance",
+		"name": "用户维护",
+		"icon": "el-icon-s-tools"
+	},
+	{
+		"path": "/RoleMaintenance",
+		"name": "角色维护",
+		"icon": "el-icon-setting"
+	},
+	{
+		"path": "/BusinessListMaintenance",
+		"name": "业务清单维护",
+		"icon": "el-icon-goods"
+	},
+	{
+		"path": "/OrganizationManagement",
+		"name": "组织机构管理",
+		"icon": "el-icon-s-help"
+	},
+	{
+		"path": "/LogManagement",
+		"name": "日志管理",
+		"icon": "el-icon-s-order"
+	}
+]

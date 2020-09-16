@@ -1,6 +1,6 @@
 <template>
 	<div class="log_management">
-		<h1>{{ msg }}</h1>
+		<iframe src="https://www.douyu.com"></iframe>
 	</div>
 </template>
 
@@ -24,5 +24,9 @@
 </script>
 
 <style scoped>
-	.log_management {}
+	.log_management,
+	iframe {
+		width: 100%;
+		height: 100%;
+	}
 </style>

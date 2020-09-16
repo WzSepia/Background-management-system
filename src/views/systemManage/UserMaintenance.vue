@@ -1,6 +1,6 @@
 <template>
 	<div class="user_maintenance">
-		<h1>{{ msg }}</h1>
+		<iframe src="https://www.163.com/"></iframe>
 	</div>
 </template>
 
@@ -24,5 +24,8 @@
 </script>
 
 <style scoped>
-	.user_maintenance {}
+	.user_maintenance ,iframe{
+		width: 100%;
+		height: 100%;
+	}
 </style>

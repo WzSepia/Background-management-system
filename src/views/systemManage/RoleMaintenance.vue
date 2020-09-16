@@ -1,6 +1,6 @@
 <template>
 	<div class="role_maintenance">
-		<h1>{{ msg }}</h1>
+		<iframe src="https://xueshu.baidu.com/usercenter/index/detail?tab_id=2&id=118"></iframe>
 	</div>
 </template>
 
@@ -24,5 +24,9 @@
 </script>
 
 <style scoped>
-	.role_maintenance {}
+	.role_maintenance,
+	iframe {
+		width: 100%;
+		height: 100%;
+	}
 </style>

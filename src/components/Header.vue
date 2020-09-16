@@ -3,13 +3,13 @@
 		<div class="header_logo fl">后台管理系统</div>
 		<!-- <ul class="header_lists fl">
 			<li class="fl" v-for="(item, index) in header_lists" :key="index">
-				<img :src="item.src" @click="listClick(item.src_click)" />
+				<img :src="require(item.src)" @click="listClick(item.src_click)" />
 				<p>{{ item.name }}</p>
 			</li>
 		</ul> -->
 		<div class="fl">
 			<el-tabs v-model="activeName" @tab-click="headerTabsClick">
-				<el-tab-pane v-for="(item, index) in header_lists" :key="index" :label="item.name" :name="index+''"></el-tab-pane>
+				<el-tab-pane v-for="(item, index) in header_list" :key="index" :label="item.name" :name="index+''"></el-tab-pane>
 			</el-tabs>
 		</div>
 		<div class="fr">
@@ -24,9 +24,12 @@
 
 <script>
 	import store from '../store/index.js';
+	import axios from 'axios';
+
 	import {
 		mapState,
-		mapMutations
+		mapMutations,
+		mapActions
 	} from 'vuex';
 
 	export default {
@@ -34,22 +37,36 @@
 		data() {
 			return {
 				activeName: 0,
+				header_list: []
 			}
 		},
 		store,
 		computed: {
-			...mapState(['header_lists'])
+			...mapState(["headerList"])
 		},
 		methods: {
-			...mapMutations([""]),
+			...mapMutations(["setList"]),
+			...mapActions(["getList"]),
 			listClick(src) {
 				console.log(src);
 			},
 			headerTabsClick(tab, event) {
+				void(event);
 				this.activeName = tab.name;
-				//this.$router.push("./")
-				console.log(event, this.activeName);
 			}
+		},
+		created() {
+			axios.get("/json/headerList.json", {
+					timeout: 3000,
+				})
+				.then(res => {
+					console.log(res.data)
+					this.header_list = res.data;
+					console.log("this.header_list=", this);
+				})
+				.catch((error) => {
+					console.log("error", error)
+				})
 		}
 	};
 </script>
@@ -92,7 +109,8 @@
 		font-size: 13px;
 	}
 
-	.el-tabs__item {
+	.header .el-tabs__item {
+		padding: 0 5px;
 		color: #FFFFFF !important;
 	}
 

@@ -1,18 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [{
 		path: "/",
-		redirect: "index"
-	}, 
-	// {
-	// 	path: '/home',
-	// 	name: 'Home',
-	// 	component: Home
-	// },
+		redirect: "UserMaintenance"
+	},
 	{
 		path: '/index',
 		name: 'Index',
@@ -52,9 +46,7 @@ const routes = [{
 		path: '/Login',
 		name: '登陆',
 		component: () => import('../views/login/Login.vue')
-	},
-
-
+	}
 ]
 
 const router = new VueRouter({
@@ -63,17 +55,19 @@ const router = new VueRouter({
 	routes
 })
 
-//路由守卫
+/**
+	* 路由守卫
+	* to: Route: 即将要进入的目标 路由对象
+	* from: Route: 当前导航正要离开的路由
+	* next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
+	* */
 router.beforeEach((to, from, next) => {
-	// const isLogin = !!localStorage.eleToken;
-	// if (to.path === "/login") {
-	// 	next()
-	// } else {
-	// 	isLogin ? next() : next("/login")
-	// }
-	next()
-	//console.log(to, from, next);
-	this.$router.push()
+	const isLogin = !!localStorage.eleToken;
+	if (to.path === "/login") {
+		next()
+	} else {
+		isLogin ? next() : next("/login")
+	}
 })
 
 export default router
