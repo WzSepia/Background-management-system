@@ -3,15 +3,17 @@
 		<div class="collapse-btn" @click="collapseChange">
 			<i class="el-icon-s-grid icon-btn"></i>
 		</div>
-		<el-menu mode="vertical" :collapse="collapse" default-active="1" class="el-menu-vertical" @select="handleSelect">
-			<Menu :items="nav_list" />
+		<el-menu mode="vertical" :collapse="collapse" default-active="1" class="el-menu-vertical" @select="navSelect">
+			<!-- <Menu :items="nav_list" /> -->
+			<MenuIframe :items="nav_list" />
 		</el-menu>
 	</div>
 </template>
 
 <script>
 	//import bus from "../common/bus.js"
-	import Menu from "./Menu.vue"
+	//import Menu from "./Menu.vue"
+	import MenuIframe from "./MenuIframe.vue"
 	import store from '../store/index.js';
 	import {
 		mapState,
@@ -23,17 +25,15 @@
 			return {}
 		},
 		components: {
-			Menu
+			//Menu
+			MenuIframe
 		},
 		store,
 		computed: {
-			...mapState(['nav_list', "collapse"])
+			...mapState(['nav_list', "collapse","iframe_src"])
 		},
 		methods: {
-			...mapMutations(["collapseChange"]),
-			handleSelect(key, keyPath) {
-				console.log(key, keyPath);
-			}
+			...mapMutations(["collapseChange","navSelect"])
 		}
 	};
 </script>
@@ -65,7 +65,7 @@
 	}
 
 	.el-menu-vertical:not(.el-menu--collapse) {
-		width: 260px;
+		width: 200px;
 		min-height: 400px;
 	}
 </style>

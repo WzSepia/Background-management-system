@@ -66,8 +66,8 @@
 						this.$router.push("/index");
 					} else {
 						this.$message({
-							type:"warning",
-							message:"'error submit!!'"
+							type: "warning",
+							message: "'error submit!!'"
 						});
 						return false;
 					}
@@ -85,6 +85,9 @@
 		width: 100%;
 		height: 100%;
 		background-color: #2c3e50ac;
+		background-image: url(../../../public/img/rain.gif);
+		background-repeat: no-repeat;
+		background-size: cover;
 		z-index: 100;
 	}
 
@@ -98,6 +101,7 @@
 		transform: translate(-50%, -50%);
 		border-radius: 4px;
 		box-shadow: 0 4px 10px 4px #000000;
+		background-color: rgba(12, 12, 12, .8);
 	}
 
 	.el-form-item__label {

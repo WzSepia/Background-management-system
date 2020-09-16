@@ -12,12 +12,39 @@
 				<el-tab-pane v-for="(item, index) in header_list" :key="index" :label="item.name" :name="index+''"></el-tab-pane>
 			</el-tabs>
 		</div>
-		<div class="fr">
-			<div class="fl">2020年9月14日</div>
-			<div class="fl">2</div>
-			<div class="fl">超级管理员</div>
-			<div class="key fl">4</div>
-			<div class="close fl">5</div>
+		<div class="user_box fr">
+			<div class="user_info">
+				<p>{{time}}</p>
+				<p>2020年9月14日</p>
+			</div>
+			<div class="user_icon">
+				<i class="fa fa-user"></i>
+				<p>超级管理员</p>
+			</div>
+			<div class="user_btns">
+				<el-button type="primary" title="设置密码" size="mini" icon="el-icon-setting" @click="dialogFormVisible = true">
+				</el-button>
+				<el-button type="danger" title="退出系统" size="mini" icon="el-icon-error" @click="quitSystem">
+				</el-button>
+				<el-dialog title="修改登陆密码" :visible.sync="dialogFormVisible">
+					<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+						<el-form-item label="旧密码:" prop="oldPass">
+							<el-input type="password" v-model="ruleForm2.oldPass" auto-complete="off"></el-input>
+						</el-form-item>
+						<el-form-item label="密码:" prop="pass">
+							<el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+						</el-form-item>
+						<el-form-item label="确认密码:" prop="checkPass">
+							<el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
+						</el-form-item>
+						<el-form-item>
+							<el-button @click="resetForm('ruleForm2'),dialogFormVisible = false">取 消</el-button>
+							<el-button @click="resetForm('ruleForm2')">重 置</el-button>
+							<el-button type="primary" @click="submitForm('ruleForm2'),resetForm('ruleForm2'),dialogFormVisible = false">确 定</el-button>
+						</el-form-item>
+					</el-form>
+				</el-dialog>
+			</div>
 		</div>
 	</div>
 </template>
@@ -28,41 +55,175 @@
 
 	import {
 		mapState,
-		mapMutations,
-		mapActions
 	} from 'vuex';
 
 	export default {
 		name: 'Header',
 		data() {
+			var checkOldPass = (rule, value, callback) => {
+				if (value === '') {
+					callback(new Error('请输入旧密码'));
+				} else {
+					callback();
+				}
+			};
+			var validatePass = (rule, value, callback) => {
+				if (value === '') {
+					callback(new Error('请输入密码'));
+				} else {
+					if (this.ruleForm2.checkPass !== '') {
+						this.$refs.ruleForm2.validateField('checkPass');
+					}
+					callback();
+				}
+			};
+			var validatePass2 = (rule, value, callback) => {
+				if (value === '') {
+					callback(new Error('请再次输入密码'));
+				} else if (value !== this.ruleForm2.pass) {
+					callback(new Error('两次输入密码不一致!'));
+				} else {
+					callback();
+				}
+			};
 			return {
+				//默认展示第几个头部tab
 				activeName: 0,
-				header_list: []
+				//头部页签数据
+				header_list: [],
+				//时间：hh:mm:ss
+				time: "",
+				//判断弹窗的显示隐藏
+				dialogFormVisible: false,
+				//弹出框表单数据
+				ruleForm2: {
+					pass: '', //当前密码
+					checkPass: '', //二次密码检测
+					oldPass: '' //旧密码
+				},
+				//检测规则
+				rules2: {
+					pass: [{
+						validator: validatePass,
+						trigger: 'blur'
+					}],
+					checkPass: [{
+						validator: validatePass2,
+						trigger: 'blur'
+					}],
+					oldPass: [{
+						validator: checkOldPass,
+						trigger: 'blur'
+					}]
+				}
 			}
 		},
+		//store配置
 		store,
+		//计算
 		computed: {
-			...mapState(["headerList"])
+			...mapState([""])
 		},
+		//方法集
 		methods: {
-			...mapMutations(["setList"]),
-			...mapActions(["getList"]),
+			//带图片的点击(old)
 			listClick(src) {
 				console.log(src);
 			},
+			//页签切换
 			headerTabsClick(tab, event) {
 				void(event);
 				this.activeName = tab.name;
+				this.$message({
+					type: "success",
+					message: "点击到第" + tab.name + "个索引页签"
+				})
+				//请求数据
+				// axios.post({
+				// 		url: "",
+				// 		param: {},
+				// 		timeout: 3000
+				// 	}).then(res => {
+				// 		if(res){
+				// 			this.$message({
+				// 				type: "success",
+				// 				message: "修改成功!!"
+				// 			});
+				// 		}
+				// 	})
+				// 	.catch((error) => {
+				// 		console.log("error", error)
+				// 	})
+			},
+			//实时时间展示
+			timeClock() {
+				setInterval(() => {
+					const h = new Date().getHours();
+					const m = new Date().getMinutes();
+					const s = new Date().getSeconds();
+					this.time = h + ":" + m + ":" + s;
+				}, 1000)
+			},
+			//退出系统
+			quitSystem() {
+				this.$confirm('确定退出系统?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'info'
+				}).then(() => {
+					localStorage.eleToken = "";
+					this.$message({
+						type: 'success',
+						message: '退出成功!'
+					})
+					setTimeout(() => {
+						location.reload() // 强制刷新
+					}, 1000)
+				}).catch(() => {
+					// this.$message({
+					// 	type: 'info',
+					// 	message: '已取消退出'
+					// })
+				})
+			},
+			//设置密码提交
+			submitForm(formName) {
+				this.$refs[formName].validate((valid) => {
+					if (valid) {
+						alert("修改成功！");
+						//请求数据
+						// axios.post({
+						// 		url: "",
+						// 		param: {},
+						// 		timeout: 3000
+						// 	}).then(res => {
+						// 		if(res){
+						// 			this.$message({
+						// 				type: "success",
+						// 				message: "修改成功!!"
+						// 			});
+						// 		}
+						// 	})
+						// 	.catch((error) => {
+						// 		console.log("error", error)
+						// 	})
+					} else {
+						this.$message.error("提交失败")
+						return false;
+					}
+				});
+			},
+			resetForm(formName) {
+				this.$refs[formName].resetFields();
 			}
 		},
 		created() {
+			this.timeClock();
+			//
 			axios.get("/json/headerList.json", {
 					timeout: 3000,
-				})
-				.then(res => {
-					console.log(res.data)
+				}).then(res => {
 					this.header_list = res.data;
-					console.log("this.header_list=", this);
 				})
 				.catch((error) => {
 					console.log("error", error)
@@ -79,11 +240,11 @@
 		background-color: #2c3e50;
 		border-bottom: 1px solid #1f2d3d;
 		overflow: hidden;
-		padding: 5px 31px 0 0;
+		padding: 5px 5px 0 0;
 	}
 
 	.header_logo {
-		width: 260px;
+		width: 200px;
 		height: 100%;
 		line-height: 80px;
 		font-size: 22px;
@@ -118,15 +279,28 @@
 		color: #409EFF !important;
 	}
 
-	.key {
-		width: 42px;
-		height: 42px;
-		border: 1px solid #409EFF;
+	.user_box {
+		display: flex;
 	}
 
-	.close {
-		width: 42px;
-		height: 42px;
-		border: 1px solid #409EFF;
+	.user_info {
+		font-size: 12px;
+		margin: 10px 4px 0 0;
+	}
+
+	.user_icon i {
+		font-size: 40px;
+	}
+
+	.user_icon p {
+		font-size: 12px;
+	}
+
+	.user_btns {
+		margin-top: 10px;
+	}
+
+	.el-form-item__label {
+		color: #000000;
 	}
 </style>

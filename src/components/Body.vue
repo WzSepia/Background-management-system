@@ -1,21 +1,32 @@
 <template>
 	<div class="main">
 		<Aside />
-		<Main />
+		<!-- <Main /> -->
+		<MainIframe :src='iframe_src?iframe_src:"https://vuetifyjs.com/zh-Hans/"' />
 	</div>
 </template>
 
 <script>
+	import store from "../store/index.js"
+	import {
+		mapState
+	} from "vuex"
 	import Aside from "./Aside.vue"
-	import Main from "./Main.vue"
+	//import Main from "./Main.vue"
+	import MainIframe from "./MainIframe.vue"
 	export default {
 		name: 'Body',
-		props: {
-			msg: String
+		data() {
+			return {}
 		},
+		store,
 		components: {
 			Aside,
-			Main
+			//Main,
+			MainIframe
+		},
+		computed: {
+			...mapState(["nav_list","iframe_src"])
 		}
 	};
 </script>
