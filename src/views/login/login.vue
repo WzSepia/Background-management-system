@@ -89,7 +89,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: #2c3e50ac;
-		background-image: url(../../../public/img/rain.gif);
+		background-image: url(../../../public/images/rain.gif);
 		background-repeat: no-repeat;
 		background-size: cover;
 		z-index: 100;

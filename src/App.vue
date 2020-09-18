@@ -22,7 +22,7 @@
 		color: #2c3e50;
 		width: 100%;
 		height: 100%;
-		background-image: url(../public/img/rain.gif);
+		background-image: url(../public/images/rain.gif);
 		background-repeat: no-repeat;
 		background-size: cover;
 	}
