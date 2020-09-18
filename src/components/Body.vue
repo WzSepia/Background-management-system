@@ -2,7 +2,7 @@
 	<div class="main">
 		<Aside />
 		<!-- <Main /> -->
-		<MainIframe :src='iframe_src?iframe_src:"https://vuetifyjs.com/zh-Hans/"' />
+		<MainIframe :src='iframe_src?iframe_src:"http://10.10.50.55:8012/yyaq/"' />
 	</div>
 </template>
 

@@ -68,7 +68,8 @@ const router = new VueRouter({
  * next: Function: 一定要调用该方法来 resolve 这个钩子。执行效果依赖 next 方法的调用参数。
  * */
 router.beforeEach((to, from, next) => {
-	const isLogin = !!localStorage.eleToken;
+	const isLogin = !!sessionStorage.eleToken;
+	console.log("isLogin",isLogin)
 	if (to.path === "/login") {
 		next()
 	} else {

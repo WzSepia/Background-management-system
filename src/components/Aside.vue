@@ -56,7 +56,7 @@
 	.collapse-btn {
 		color: #FFFFFF;
 		cursor: pointer;
-		padding-right: 24px;
+		padding-right: 21px;
 		text-align: right;
 	}
 

@@ -171,7 +171,7 @@
 					cancelButtonText: '取消',
 					type: 'info'
 				}).then(() => {
-					localStorage.eleToken = "";
+					sessionStorage.eleToken = "";
 					this.$message({
 						type: 'success',
 						message: '退出成功!'
@@ -302,5 +302,29 @@
 
 	.el-form-item__label {
 		color: #000000;
+	}
+	
+	@media screen and (min-width:1800px) {
+		.header .el-tabs__item {
+			padding: 0 20px;
+		}
+	}
+	
+	@media screen and (min-width:1660px) and (max-width:1800px) {
+		.header .el-tabs__item {
+			padding: 0 20px;
+		}
+	}
+	
+	@media screen and (min-width:1420px) and (max-width:1660px) {
+		.header .el-tabs__item {
+			padding: 0 5px;
+		}
+	}
+	
+	@media screen and (max-width:1420px) {
+		.header .el-tabs__item {
+			padding: 0 1px;
+		}
 	}
 </style>

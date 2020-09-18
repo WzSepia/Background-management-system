@@ -58,12 +58,16 @@
 				this.$refs[formName].validate((valid) => {
 					//valid true / false
 					if (valid) {
+						// this.$axios.post("/api/user/addUser",this.ruleForm)
+						// .then(res=>{
+						sessionStorage.eleToken = valid; //res.data;
+						// 	console.log(res);
 						this.$message({
 							message: '登陆成功',
 							type: 'success'
 						});
-						localStorage.eleToken = true;
 						this.$router.push("/index");
+						//})
 					} else {
 						this.$message({
 							type: "warning",
